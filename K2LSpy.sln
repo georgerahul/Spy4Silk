@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.852
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "K2L.Spy.Viewer", "K2L.Spy.Viewer\K2L.Spy.Viewer.csproj", "{2EE1BDCB-4273-43D9-A2BD-A2B9FCF0FB88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "K2L.Spy.Framework", "K2L.Spy.Framework\K2L.Spy.Framework.csproj", "{835BA810-11B9-4F8F-B92D-948E56514ECB}"
+	ProjectSection(ProjectDependencies) = postProject
+		{41B5AB5D-CC3E-4018-B6E1-A8357C7CC8A9} = {41B5AB5D-CC3E-4018-B6E1-A8357C7CC8A9}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "K2L.Spy.Framework.UT", "K2L.Spy.Framework.UT\K2L.Spy.Framework.UT.csproj", "{FFE95587-2B26-4CD5-A624-E9D4D7BAD1B3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{835BA810-11B9-4F8F-B92D-948E56514ECB} = {835BA810-11B9-4F8F-B92D-948E56514ECB}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "K2L.Spy.Logger", "K2L.Spy.Logger\K2L.Spy.Logger.csproj", "{41B5AB5D-CC3E-4018-B6E1-A8357C7CC8A9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2EE1BDCB-4273-43D9-A2BD-A2B9FCF0FB88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EE1BDCB-4273-43D9-A2BD-A2B9FCF0FB88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EE1BDCB-4273-43D9-A2BD-A2B9FCF0FB88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EE1BDCB-4273-43D9-A2BD-A2B9FCF0FB88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{835BA810-11B9-4F8F-B92D-948E56514ECB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{835BA810-11B9-4F8F-B92D-948E56514ECB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{835BA810-11B9-4F8F-B92D-948E56514ECB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{835BA810-11B9-4F8F-B92D-948E56514ECB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFE95587-2B26-4CD5-A624-E9D4D7BAD1B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFE95587-2B26-4CD5-A624-E9D4D7BAD1B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFE95587-2B26-4CD5-A624-E9D4D7BAD1B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41B5AB5D-CC3E-4018-B6E1-A8357C7CC8A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41B5AB5D-CC3E-4018-B6E1-A8357C7CC8A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41B5AB5D-CC3E-4018-B6E1-A8357C7CC8A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41B5AB5D-CC3E-4018-B6E1-A8357C7CC8A9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {26B2EF4E-7F6B-452E-AC5F-1EA226E78542}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://kawstfs-mig:8080/tfs/k2ltools
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = K2L.Spy.Framework.UT\\K2L.Spy.Framework.UT.csproj
+		SccProjectName1 = K2L.Spy.Framework.UT
+		SccLocalPath1 = K2L.Spy.Framework.UT
+		SccProjectUniqueName2 = K2L.Spy.Viewer\\K2L.Spy.Viewer.csproj
+		SccProjectName2 = K2L.Spy.Viewer
+		SccLocalPath2 = K2L.Spy.Viewer
+		SccProjectUniqueName3 = K2L.Spy.Framework\\K2L.Spy.Framework.csproj
+		SccProjectName3 = K2L.Spy.Framework
+		SccLocalPath3 = K2L.Spy.Framework
+		SccProjectUniqueName4 = K2L.Spy.Logger\\K2L.Spy.Logger.csproj
+		SccProjectName4 = K2L.Spy.Logger
+		SccLocalPath4 = K2L.Spy.Logger
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,201 @@
+﻿<UserControl x:Class="K2L.Spy.Viewer.View.TabView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:model="clr-namespace:K2L.Spy.Viewer.Model"
+             xmlns:vieModel="clr-namespace:K2L.Spy.Viewer.ViewModel"
+             xmlns:convertor="clr-namespace:K2L.Spy.Viewer.Convertors"
+             xmlns:dataModel="clr-namespace:K2L.Spy.Framework.DataModel;assembly=K2L.Spy.Framework"
+             xmlns:ntf="clr-namespace:SilkTest.Ntf;assembly=SilkTest.Ntf"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="700">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <convertor:TestConverter x:Key="TestConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="1.5*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Column="0" Margin="10" Grid.Row="0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Text="Control XPath :"></TextBlock>
+                <TextBox Margin="10,0,23,0" Grid.Row="0" Text="{Binding TextBoxProperty, UpdateSourceTrigger=PropertyChanged }"  HorizontalAlignment="Stretch" Grid.Column="1"></TextBox>
+                <Button Margin="10,0,10,0" Grid.Row="0" Command="{Binding ProcessButtonCommand}"  Content="Process" Grid.Column="2"></Button>
+
+                <TextBlock Grid.Row="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Bottom" TextWrapping="Wrap"
+                       Margin="5,0,0,0" FontSize="11" FontWeight="Bold" Text="{Binding ValidationText}">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ValidationType}" Value="{x:Static vieModel:InformationColor.Yellow}">
+                                    <Setter Property="Foreground" Value="Orange" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ValidationType}" Value="{x:Static vieModel:InformationColor.Red}">
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ValidationType}" Value="{x:Static vieModel:InformationColor.Green}">
+                                    <Setter Property="Foreground" Value="Green" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+                <TextBlock Text="Properties :" Margin="0,10,0,0" VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="0" FontSize="14" FontWeight="Bold" />
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Border BorderBrush="LightGray" Margin="10" BorderThickness="1" Grid.Column="0">
+                    <dxg:TreeListControl x:Name="propertyTree" SelectedItem="{Binding SelectedModelBase}" ShowBorder="False" ItemsSource="{Binding Properties}">
+                        <dxg:TreeListControl.Resources>
+                            <HierarchicalDataTemplate DataType="{x:Type dataModel:Property}" ItemsSource="{Binding GuiElements}" />
+                        </dxg:TreeListControl.Resources>
+                        <dxg:TreeListControl.Columns>
+                            <dxg:TreeListColumn  FieldName="Name"  AllowSorting="True">
+                                <dxg:TreeListColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock FontWeight="Bold" HorizontalAlignment="Center" Text="Name"></TextBlock>
+                                    </DataTemplate>
+                                </dxg:TreeListColumn.HeaderTemplate>
+                            </dxg:TreeListColumn>
+                            <dxg:TreeListColumn  FieldName="Value" AllowSorting="True">
+                                <dxg:TreeListColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock FontWeight="Bold" HorizontalAlignment="Center" Text="Value"></TextBlock>
+                                    </DataTemplate>
+                                </dxg:TreeListColumn.HeaderTemplate>
+                            </dxg:TreeListColumn>
+                        </dxg:TreeListControl.Columns>
+                        <dxg:TreeListControl.View>
+                            <dxg:TreeListView  TreeDerivationMode="HierarchicalDataTemplate"  AutoExpandAllNodes="True" ShowAutoFilterRow="True" AllowColumnFiltering="True" ShowNodeImages="False" NavigationStyle="Row" AutoWidth="True" AllowEditing="False">
+                                <dxg:TreeListView.RowStyle>
+                                    <Style TargetType="{x:Type dxg:RowControl}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Row.PropertyState}" Value="{x:Static dataModel:PropertyState.Changed}">
+                                                <Setter Property="Background" Value="Yellow" />
+                                                <Setter Property="Foreground" Value="Black" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=Row.PropertyState}" Value="{x:Static dataModel:PropertyState.NewlyAdded}">
+                                                <Setter Property="Background" Value="Green" />
+                                                <Setter Property="Foreground" Value="White" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=Row.PropertyState}" Value="{x:Static dataModel:PropertyState.NoChange}">
+                                                <Setter Property="Background" Value="White" />
+                                                <Setter Property="Foreground" Value="Black" />
+                                            </DataTrigger>
+
+                                            <!--<DataTrigger Binding="{Binding Path=TreeViewItem., Converter={StaticResource TestConverter}}" Value="true">
+                                                <Setter Property="Background" Value="Yellow" />
+                                                <Setter Property="Foreground" Value="Black" />
+                                            </DataTrigger>-->
+                                        </Style.Triggers>
+                                    </Style>
+                                </dxg:TreeListView.RowStyle>
+                            </dxg:TreeListView>
+                        </dxg:TreeListControl.View>
+                    </dxg:TreeListControl>
+                </Border>
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="10" Grid.Row="0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="5" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center"  Text="Parameters :" />
+                <TextBox Margin="2,0,2,0" Grid.Row="0" Text="{Binding ParameterTextProperty}" HorizontalAlignment="Stretch" Grid.Column="1" />
+                <Button HorizontalAlignment="Left" Margin="5,0,10,0" Width="60" Grid.Row="0" Command="{Binding InvokeButtonCommand}"  Content="Invoke" Grid.Column="2" />
+                <TextBlock Grid.Row="1" Grid.ColumnSpan="3"  VerticalAlignment="Top" TextWrapping="WrapWithOverflow" HorizontalAlignment="Stretch"
+                       Margin="0,10,0,0" FontSize="11" FontWeight="Bold" Text="{Binding MethodValidationText}">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding MethodValidationType}" Value="{x:Static vieModel:InformationColor.Yellow}">
+                                    <Setter Property="Foreground" Value="Orange" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding MethodValidationType}" Value="{x:Static vieModel:InformationColor.Red}">
+                                    <Setter Property="Foreground" Value="Red" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding MethodValidationType}" Value="{x:Static vieModel:InformationColor.Green}">
+                                    <Setter Property="Foreground" Value="Green" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+                <TextBlock Text="Methods :" Margin="0,10,0,0" VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="0" FontSize="14" FontWeight="Bold" />
+            </Grid>
+
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <!--<ColumnDefinition Width="Auto" />-->
+                </Grid.ColumnDefinitions>
+                <Border BorderBrush="LightGray" Margin="10" BorderThickness="1" Grid.Column="0">
+                    <dxg:TreeListControl SelectedItem="{Binding SelectedModelBase}"    ShowBorder="False" ItemsSource="{Binding DynamicMethods}">
+                        <dxg:TreeListControl.Resources>
+                            <HierarchicalDataTemplate DataType="{x:Type dataModel:Property}">
+                            </HierarchicalDataTemplate>
+                        </dxg:TreeListControl.Resources>
+                        <dxg:TreeListControl.Columns>
+                            <dxg:TreeListColumn  FieldName="Name"  AllowSorting="True">
+                                <dxg:TreeListColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock FontWeight="Bold" HorizontalAlignment="Center" Text="Name"></TextBlock>
+                                    </DataTemplate>
+                                </dxg:TreeListColumn.HeaderTemplate>
+                            </dxg:TreeListColumn>
+                            <!--<dxg:TreeListColumn  FieldName="InvokableText" AllowSorting="True">
+                                <dxg:TreeListColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock FontWeight="Bold" HorizontalAlignment="Center" Text="Invokable"></TextBlock>
+                                    </DataTemplate>
+                                </dxg:TreeListColumn.HeaderTemplate>
+                            </dxg:TreeListColumn>-->
+                        </dxg:TreeListControl.Columns>
+                        <dxg:TreeListControl.View>
+                            <dxg:TreeListView  TreeDerivationMode="HierarchicalDataTemplate" AutoExpandAllNodes="True" ShowAutoFilterRow="True" AllowColumnFiltering="True" ShowNodeImages="False" NavigationStyle="Row" AutoWidth="True" AllowEditing="False" />
+                        </dxg:TreeListControl.View>
+                    </dxg:TreeListControl>
+                </Border>
+
+                <!--<Grid Margin="10" VerticalAlignment="Center"  Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" Margin="10" Command="{Binding ParentModelCommandButton}" Content="Invoke"></Button>
+                </Grid>-->
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

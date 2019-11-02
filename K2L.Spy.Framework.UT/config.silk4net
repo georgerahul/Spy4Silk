@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<recorderProject version="18.5">
+  <applicationConfiguration>
+    <moduleNamePattern>*\K2L.OptoLyzerStudio.exe</moduleNamePattern>
+    <baseStateInfo>
+      <executable>%ProgramW6432%\K2L GmbH &amp; Co. KG\OptoLyzer Studio\Viewer\K2L.OptoLyzerStudio.exe</executable>
+      <workingDirectory>%ProgramW6432%\K2L GmbH &amp; Co. KG\OptoLyzer Studio\Viewer</workingDirectory>
+      <locator>/WPFWindow[@caption='OptoLyzer Studio']</locator>
+    </baseStateInfo>
+  </applicationConfiguration>
+  <agentOptions>
+    <entry>
+      <string>OPT_APPREADY_TIMEOUT</string>
+      <int>120000</int>
+    </entry>
+    <entry>
+      <string>OPT_SHOW_PLAYBACK_STATUS_DIALOG</string>
+      <boolean>false</boolean>
+    </entry>
+    <entry>
+      <string>OPT_PLAYBACK_STATUS_DIALOG_SCREENSHOTS</string>
+      <boolean>true</boolean>
+    </entry>
+  </agentOptions>
+</recorderProject>

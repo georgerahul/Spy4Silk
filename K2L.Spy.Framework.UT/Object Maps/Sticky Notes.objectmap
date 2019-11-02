@@ -1,0 +1,3 @@
+<ObjectMap version="1">
+  <ObjectMapEntry id="Sticky Notes" locator="/Control[@caption=&apos;Sticky Notes&apos;]"/>
+</ObjectMap>

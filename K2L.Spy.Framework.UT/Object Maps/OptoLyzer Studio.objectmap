@@ -1,0 +1,3 @@
+<ObjectMap version="1">
+  <ObjectMapEntry id="OptoLyzer Studio" locator="/WPFWindow[@caption=&apos;OptoLyzer Studio&apos;]"/>
+</ObjectMap>
